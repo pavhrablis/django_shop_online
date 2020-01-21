@@ -5,14 +5,26 @@
     <head>
         <meta charset="utf-8" />
         <title>{% block title %} Shop{% endblock title %} </title>
-        <link href="{%static "css/base.css" %} rel=stylesheet"
+        <link href="{% static "css/base.css" %}" rel="stylesheet">
     </head>
     <body>
         <div id="header">
             <a href="/" class="logo">My Shop</a>
         </div>
         <div id="subheader">
-            <div class="cart">Your cart empty.</div>
+            <div class="cart">
+                {% with  total_items=cart|length  %}
+                    {% if cart|length > 0 %}
+                    Yor cart:
+                    <a href="{% url "cart:cart_detail" %}">
+                        {{ total_items }}item{{total_items|pluralize}},
+                        ${{ cart.get_total_price }}
+                        </a>
+                    {% else %}
+                    Your cart empty.
+                    {% endif %}
+                {% endwith %}
+            </div>
         </div>
         <div id="content">
             {% block content %}
