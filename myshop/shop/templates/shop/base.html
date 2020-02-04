@@ -5,7 +5,8 @@
     <head>
         <meta charset="utf-8" />
         <title>{% block title %} Shop{% endblock title %} </title>
-        <link href="{% static "css/base.css" %}" rel="stylesheet">
+        <link href="{% static 'css/base.css' %}" rel="stylesheet">
+        <link rel="stylesheet" href="{% static 'css/pagination.css' %}">
     </head>
     <body>
         <div id="header">
@@ -16,7 +17,7 @@
                 {% with  total_items=cart|length  %}
                     {% if cart|length > 0 %}
                     Yor cart:
-                    <a href="{% url "cart:cart_detail" %}">
+                    <a href="{% url 'cart:cart_detail' %}">
                         {{ total_items }}item{{total_items|pluralize}},
                         ${{ cart.get_total_price }}
                         </a>
